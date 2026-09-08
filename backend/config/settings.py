@@ -33,11 +33,10 @@ SECRET_KEY = os.getenv(
 
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = [
-    "localhost",
-    "127.0.0.1",
-    "web",
-]
+ALLOWED_HOSTS = os.getenv(
+    "ALLOWED_HOSTS",
+    "127.0.0.1,localhost"
+).split(",")
 
 
 # =========================================================
@@ -115,6 +114,11 @@ DATABASES = {
         "PASSWORD": os.getenv("DB_PASSWORD"),
         "HOST": os.getenv("DB_HOST"),
         "PORT": os.getenv("DB_PORT"),
+        "OPTIONS": {
+            "ssl": {
+                "ssl_mode": "REQUIRED",
+            },
+        },
     }
 }
 
