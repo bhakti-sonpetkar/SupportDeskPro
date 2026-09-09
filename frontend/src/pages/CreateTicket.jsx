@@ -9,7 +9,7 @@ function CreateTicket() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState("MEDIUM");
-  const [category, setCategory] = useState("3");
+  const [category, setCategory] = useState("Technical");
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -25,7 +25,7 @@ function CreateTicket() {
         title,
         description,
         priority,
-        category: Number(category),
+        category,
       });
 
       navigate("/dashboard");
@@ -155,13 +155,33 @@ function CreateTicket() {
                     setCategory(event.target.value)
                   }
                 >
-                  <option value="1">Authentication</option>
-                  <option value="2">Payment</option>
-                  <option value="3">Technical</option>
-                  <option value="4">Account</option>
-                  <option value="5">Billing</option>
-                  <option value="6">Orders</option>
-                  <option value="7">General</option>
+                  <option value="Authentication">
+                    Authentication
+                  </option>
+
+                  <option value="Payment">
+                    Payment
+                  </option>
+
+                  <option value="Technical">
+                    Technical
+                  </option>
+
+                  <option value="Account">
+                    Account
+                  </option>
+
+                  <option value="Billing">
+                    Billing
+                  </option>
+
+                  <option value="Orders">
+                    Orders
+                  </option>
+
+                  <option value="General">
+                    General
+                  </option>
                 </select>
               </div>
 

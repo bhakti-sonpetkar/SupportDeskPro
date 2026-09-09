@@ -5,7 +5,9 @@ from .models import (
     TicketComment,
     AuditLog,
     TicketAttachment,
+    Category,
 )
+
 
 class TicketSerializer(serializers.ModelSerializer):
 
@@ -17,6 +19,11 @@ class TicketSerializer(serializers.ModelSerializer):
     agent_name = serializers.CharField(
         source="assigned_agent.username",
         read_only=True
+    )
+
+    # Accept category name from frontend
+    category = serializers.CharField(
+        source="category.name"
     )
 
     class Meta:
@@ -46,6 +53,21 @@ class TicketSerializer(serializers.ModelSerializer):
             "created_at",
             "updated_at",
         ]
+
+    def create(self, validated_data):
+        category_name = validated_data.pop("category", None)
+
+        category = None
+
+        if category_name:
+            category, _ = Category.objects.get_or_create(
+                name=category_name
+            )
+
+        return Ticket.objects.create(
+            category=category,
+            **validated_data
+        )
 
 
 class TicketCommentSerializer(serializers.ModelSerializer):
@@ -105,6 +127,7 @@ class AuditLogSerializer(serializers.ModelSerializer):
             "user_name",
             "created_at",
         ]
+
 
 class TicketAttachmentSerializer(serializers.ModelSerializer):
 
