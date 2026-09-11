@@ -246,6 +246,14 @@ CELERY_BROKER_URL = os.getenv("REDIS_URL")
 
 CELERY_RESULT_BACKEND = os.getenv("REDIS_URL")
 
+CELERY_BROKER_USE_SSL = {
+    "ssl_cert_reqs": "CERT_NONE",
+}
+
+CELERY_REDIS_BACKEND_USE_SSL = {
+    "ssl_cert_reqs": "CERT_NONE",
+}
+
 CELERY_ACCEPT_CONTENT = [
     "json"
 ]
